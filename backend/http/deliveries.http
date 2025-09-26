@@ -1,0 +1,54 @@
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJjdXN0b21lckBleGFtcGxlLmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImlhdCI6MTcwNTMyNjYyMiwiZXhwIjoxNzA1NDEzMDIyfQ.3Y4Q3b3j3eZ9wZ6f3j3eZ9wZ6f3j3eZ9wZ6f3j3eZ9w
+
+### Create a delivery (Customer)
+POST http://localhost:3000/api/deliveries
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "pickupAddress": "123 Main St, New York",
+  "deliveryAddress": "456 Oak Ave, Brooklyn",
+  "packageDescription": "Important documents"
+}
+
+### Get all deliveries
+GET http://localhost:3000/api/deliveries
+Authorization: Bearer {{token}}
+
+### Get a specific delivery
+GET http://localhost:3000/api/deliveries/1
+Authorization: Bearer {{token}}
+
+### Update a delivery
+PUT http://localhost:3000/api/deliveries/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "pickupAddress": "123 Main St, New York",
+  "deliveryAddress": "456 Oak Ave, Brooklyn",
+  "packageDescription": "Very important documents"
+}
+
+### Delete a delivery
+DELETE http://localhost:3000/api/deliveries/1
+Authorization: Bearer {{token}}
+
+### Assign a driver to a delivery (Admin)
+PUT http://localhost:3000/api/deliveries/1/assign
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "driverId": 2
+}
+
+### Update delivery status (Driver)
+PUT http://localhost:3000/api/deliveries/1/status
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "IN_TRANSIT"
+}

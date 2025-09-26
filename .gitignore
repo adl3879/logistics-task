@@ -1,0 +1,47 @@
+# Gitignore for a Node.js/Next.js project with Docker
+
+# Node.js
+node_modules
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+*.tmp
+*.bak
+*.swp
+.dockerignore # This file itself should not be ignored
+
+# Backend specific
+backend/node_modules/
+backend/dist/ # Compiled output for TypeScript/JavaScript
+backend/coverage/ # Test coverage reports
+
+# Frontend specific
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/coverage/ # Test coverage reports
