@@ -11,9 +11,9 @@ const useAuthRedirect = (allowedRoles: string[] = []) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login');
+      // router.push('/login');
     } else if (allowedRoles.length > 0 && user && !allowedRoles.includes(user.role)) {
-      router.push('/'); 
+      // router.push('/'); 
     }
   }, [isAuthenticated, user, allowedRoles, router]);
 

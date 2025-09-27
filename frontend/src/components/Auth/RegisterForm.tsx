@@ -9,11 +9,12 @@ import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 const RegisterForm: React.FC = () => {
-  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState<'customer' | 'driver'>('customer'); // Default role
+  const [role, setRole] = useState<'CUSTOMER' | 'DRIVER'>('CUSTOMER'); // Default role
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { login } = useAuth();
@@ -36,8 +37,9 @@ const RegisterForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ email, password, firstName, lastName, role }),
       });
+      console.log(response);
 
       const data = await response.json();
 
@@ -59,16 +61,29 @@ const RegisterForm: React.FC = () => {
       <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Create a new account</h2>
       {error && <p className="text-red-500 text-xs italic mb-4 text-center">{error}</p>}
       <div className="mb-4">
-        <Label htmlFor="name">Full Name</Label>
+        <Label htmlFor="name">First Name</Label>
         <Input
-          id="name"
-          name="name"
+          id="firstName"
+          name="firstName"
           type="text"
           autoComplete="name"
           required
-          placeholder="Full Name"
-          value={name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <Label htmlFor="name">Last Name</Label>
+        <Input
+          id="lastName"
+          name="lastName"
+          type="text"
+          autoComplete="name"
+          required
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
         />
       </div>
       <div className="mb-4">
@@ -112,13 +127,13 @@ const RegisterForm: React.FC = () => {
       </div>
       <div className="mb-6">
         <Label htmlFor="role">Register as:</Label>
-        <Select value={role} onValueChange={(value: 'customer' | 'driver') => setRole(value)}>
+        <Select value={role} onValueChange={(value: 'CUSTOMER' | 'DRIVER') => setRole(value)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="customer">Customer</SelectItem>
-            <SelectItem value="driver">Driver</SelectItem>
+            <SelectItem value="CUSTOMER">Customer</SelectItem>
+            <SelectItem value="DRIVER">Driver</SelectItem>
           </SelectContent>
         </Select>
       </div>

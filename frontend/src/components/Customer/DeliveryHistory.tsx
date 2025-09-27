@@ -5,13 +5,13 @@ import { useAuth } from '../../context/AuthContext';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 
 interface Delivery {
-  _id: string;
-  pickupLocation: string;
-  deliveryLocation: string;
-  itemDescription: string;
+  id: string;
+  pickup_address: string;
+  delivery_address: string;
+  package_description: string;
   status: string;
-  assignedDriver?: { name: string };
-  createdAt: string;
+  assigned_driver?: { name: string };
+  created_at: string;
 }
 
 const DeliveryHistory: React.FC = () => {
@@ -29,7 +29,7 @@ const DeliveryHistory: React.FC = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3001/api/deliveries/my', {
+        const response = await fetch('http://localhost:3001/api/deliveries', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -68,19 +68,19 @@ const DeliveryHistory: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {deliveries.map((delivery) => (
-            <Card key={delivery._id}>
+            <Card key={delivery.id}>
               <CardHeader>
-                <CardTitle>Delivery #{delivery._id.slice(-5)}</CardTitle>
+                <CardTitle>Delivery #{delivery.id}</CardTitle>
                 <CardDescription>Status: {delivery.status}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Pickup: {delivery.pickupLocation}</p>
-                <p>Delivery: {delivery.deliveryLocation}</p>
-                <p>Item: {delivery.itemDescription}</p>
-                {delivery.assignedDriver && <p>Driver: {delivery.assignedDriver.name}</p>}
+                <p>Pickup: {delivery.pickup_address}</p>
+                <p>Delivery: {delivery.delivery_address}</p>
+                <p>Item: {delivery.package_description}</p>
+                {/* {delivery.assignedDriver && <p>Driver: {delivery.assignedDriver.name}</p>} */}
               </CardContent>
               <CardFooter>
-                <p className="text-sm text-gray-500">Requested on: {new Date(delivery.createdAt).toLocaleDateString()}</p>
+                <p className="text-sm text-gray-500">Requested on: {new Date(delivery.created_at).toLocaleDateString()}</p>
               </CardFooter>
             </Card>
           ))}

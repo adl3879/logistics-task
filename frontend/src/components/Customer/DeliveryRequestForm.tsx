@@ -9,9 +9,9 @@ import { useAuth } from '../../context/AuthContext';
 
 const DeliveryRequestForm: React.FC = () => {
   const { token } = useAuth();
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [deliveryLocation, setDeliveryLocation] = useState('');
-  const [itemDescription, setItemDescription] = useState('');
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [packageDescription, setpackageDescription] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | null>(null);
@@ -35,7 +35,7 @@ const DeliveryRequestForm: React.FC = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ pickupLocation, deliveryLocation, itemDescription }),
+        body: JSON.stringify({ pickupAddress, deliveryAddress, packageDescription }),
       });
 
       const data = await response.json();
@@ -45,9 +45,9 @@ const DeliveryRequestForm: React.FC = () => {
       }
 
       setSuccess('Delivery request created successfully!');
-      setPickupLocation('');
-      setDeliveryLocation('');
-      setItemDescription('');
+      setPickupAddress('');
+      setDeliveryAddress('');
+      setpackageDescription('');
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred');
     } finally {
@@ -62,32 +62,32 @@ const DeliveryRequestForm: React.FC = () => {
       {success && <p className="text-green-500 text-xs italic mb-4 text-center">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <Label htmlFor="pickupLocation">Pickup Location</Label>
+          <Label htmlFor="pickupAddress">Pickup Location</Label>
           <Input
-            id="pickupLocation"
+            id="pickupAddress"
             type="text"
-            value={pickupLocation}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPickupLocation(e.target.value)}
+            value={pickupAddress}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPickupAddress(e.target.value)}
             required
           />
         </div>
         <div className="mb-4">
-          <Label htmlFor="deliveryLocation">Delivery Location</Label>
+          <Label htmlFor="deliveryAddress">Delivery Location</Label>
           <Input
-            id="deliveryLocation"
+            id="deliveryAddress"
             type="text"
-            value={deliveryLocation}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDeliveryLocation(e.target.value)}
+            value={deliveryAddress}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDeliveryAddress(e.target.value)}
             required
           />
         </div>
         <div className="mb-6">
-          <Label htmlFor="itemDescription">Item Description</Label>
+          <Label htmlFor="packageDescription">Item Description</Label>
           <Input
-            id="itemDescription"
+            id="packageDescription"
             type="text"
-            value={itemDescription}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setItemDescription(e.target.value)}
+            value={packageDescription}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setpackageDescription(e.target.value)}
             required
           />
         </div>

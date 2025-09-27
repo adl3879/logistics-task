@@ -18,7 +18,7 @@ interface Delivery {
 }
 
 const AssignedDeliveries: React.FC = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const [deliveries, setDeliveries] = useState<Delivery[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,12 +32,11 @@ const AssignedDeliveries: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/deliveries/assigned', {
+      const response = await fetch('http://localhost:3001/api/deliveries', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
-
       const data = await response.json();
 
       if (!response.ok) {

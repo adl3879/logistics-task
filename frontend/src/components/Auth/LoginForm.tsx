@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
         throw new Error(data.message || 'Login failed');
       }
 
-      // Assuming the backend returns a token and user data
+      console.log(data);
       login(data.token, data.user);
       router.push('/'); // Redirect to home which will then redirect to appropriate dashboard
     } catch (err: any) {

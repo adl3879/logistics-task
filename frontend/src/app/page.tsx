@@ -10,12 +10,16 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('Is Authenticated:', isAuthenticated);
+    console.log('User:', user);
+
     if (isAuthenticated && user) {
-      if (user.role === 'customer') {
+      console.log('User Role:', user.role);
+      if (user.role === 'CUSTOMER') {
         router.push('/customer/dashboard');
-      } else if (user.role === 'admin') {
+      } else if (user.role === 'ADMIN') {
         router.push('/admin/dashboard');
-      } else if (user.role === 'driver') {
+      } else if (user.role === 'DRIVER') {
         router.push('/driver/dashboard');
       } else {
         // Fallback for unknown roles or if role is not set
