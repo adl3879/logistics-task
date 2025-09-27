@@ -1,8 +1,8 @@
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJjdXN0b21lckBleGFtcGxlLmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImlhdCI6MTcwNTMyNjYyMiwiZXhwIjoxNzA1NDEzMDIyfQ.3Y4Q3b3j3eZ9wZ6f3j3eZ9wZ6f3j3eZ9wZ6f3j3eZ9w
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTg5ODE4MzgsImV4cCI6MTc1OTA2ODIzOH0.QwZkqaVluk3Px7sPcJ2PcOWvUdOr8D7cp3z6_XCYWQk
 
 ### Create a delivery (Customer)
-POST http://localhost:3000/api/deliveries
+POST http://localhost:3002/api/deliveries
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -13,15 +13,15 @@ Authorization: Bearer {{token}}
 }
 
 ### Get all deliveries
-GET http://localhost:3000/api/deliveries
+GET http://localhost:3002/api/deliveries
 Authorization: Bearer {{token}}
 
 ### Get a specific delivery
-GET http://localhost:3000/api/deliveries/1
+GET http://localhost:3002/api/deliveries/1
 Authorization: Bearer {{token}}
 
 ### Update a delivery
-PUT http://localhost:3000/api/deliveries/1
+PUT http://localhost:3002/api/deliveries/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -32,20 +32,20 @@ Authorization: Bearer {{token}}
 }
 
 ### Delete a delivery
-DELETE http://localhost:3000/api/deliveries/1
+DELETE http://localhost:3002/api/deliveries/1
 Authorization: Bearer {{token}}
 
 ### Assign a driver to a delivery (Admin)
-PUT http://localhost:3000/api/deliveries/1/assign
+PUT http://localhost:3002/api/deliveries/2/assign
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "driverId": 2
+  "driverId": 0
 }
 
 ### Update delivery status (Driver)
-PUT http://localhost:3000/api/deliveries/1/status
+PUT http://localhost:3002/api/deliveries/3/status
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

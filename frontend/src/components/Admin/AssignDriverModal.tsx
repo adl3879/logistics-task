@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -134,4 +132,3 @@ const AssignDriverModal: React.FC<AssignDriverModalProps> = ({ isOpen, onClose, 
 };
 
 export default AssignDriverModal;
-

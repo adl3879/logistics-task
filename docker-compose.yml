@@ -1,19 +1,16 @@
-
 version: '3.8'
 
 services:
-  postgres:
+  db:
     image: postgres:13
-    container_name: postgres_db
-    restart: always
     environment:
-      POSTGRES_DB: logistics_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=logistics
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
 
   backend:
     build:
@@ -24,10 +21,10 @@ services:
       - "3001:3001"
     environment:
       NODE_ENV: development
-      DATABASE_URL: postgresql://user:password@postgres:5432/logistics_db
+      DATABASE_URL: postgresql://user:password@db:5432/logistics
       JWT_SECRET: supersecretjwtkey
     depends_on:
-      - postgres
+      - db
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -48,4 +45,5 @@ services:
       - /app/node_modules 
 
 volumes:
-  postgres_data:
+  pgdata:
+

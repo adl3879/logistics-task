@@ -7,6 +7,12 @@ export const register = async (req: Request, res: Response) => {
   const { email, password, firstName, lastName, role } = req.body;
 
   try {
+    const existingUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+
+    if (existingUser.rows.length > 0) {
+      return res.status(409).json({ error: 'User with this email already exists' });
+    }
+
     const hashedPassword = await hashPassword(password);
     const result = await pool.query(
       'INSERT INTO users (email, password_hash, first_name, last_name, role) VALUES ($1, $2, $3, $4, $5) RETURNING id, email, role',
@@ -18,6 +24,7 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -43,6 +50,7 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(200).json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

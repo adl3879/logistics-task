@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Label } from '@/components/ui/label'; // Assuming Shadcn Label component
+import { Label } from '@/components/ui/label'; 
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
